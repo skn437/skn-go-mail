@@ -1,4 +1,4 @@
-package utils_functions
+package utils
 
 import "github.com/gin-gonic/gin"
 
