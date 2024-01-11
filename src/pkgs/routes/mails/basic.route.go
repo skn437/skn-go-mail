@@ -1,4 +1,4 @@
-package routes_mails
+package mails
 
 import (
 	"github.com/gin-gonic/gin"
