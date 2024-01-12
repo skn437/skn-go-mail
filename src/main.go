@@ -1,12 +1,16 @@
 package main
 
-import "skn-go-mail/src/pkgs/routes"
+import (
+	"log"
+	"skn-go-mail/src/pkgs/routes"
+	"skn-go-mail/src/pkgs/utils"
+)
 
 func main() {
 	routes.GetRoutes()
 
-	//var base string = utils_functions.ViperEnvVariable("ROUTES.MAIL.BASIC")
+	var base string = utils.ViperEnvVariable("ROUTES.MAIL.BASIC")
 
-	//fmt.Printf("Base: %s", base)
+	log.Fatalf("Base: %s", base)
 
 }

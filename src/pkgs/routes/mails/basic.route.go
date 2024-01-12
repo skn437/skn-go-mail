@@ -1,22 +1,29 @@
 package mails
 
 import (
-	"io"
-
 	"github.com/gin-gonic/gin"
 )
 
+type DataType struct {
+	Name  string //* This fields should be public but in the 'post' request, request body can have lower case names
+	Title string
+}
+
 func MailRouteBasic(router *gin.Engine, url string) {
 	router.POST(url, func(ctx *gin.Context) {
-		var body io.ReadCloser = ctx.Request.Body
-		value, err := io.ReadAll(body)
+		//var body io.ReadCloser = ctx.Request.Body
+		//value, err := io.ReadAll(body)
+
+		var data *DataType
+		var err error = ctx.BindJSON(&data)
 
 		if err != nil {
 			panic(err)
 		}
 
 		ctx.JSON(200, gin.H{
-			"message": string(value),
+			"message-name":  data.Name,
+			"message-title": data.Title,
 		})
 	})
 
