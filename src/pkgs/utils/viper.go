@@ -13,7 +13,7 @@ func ViperEnvVariable(key string) string {
 	var err error = viper.ReadInConfig()
 
 	if err != nil {
-		log.Fatalf("Error while reading config file: %s", err)
+		log.Fatalf("Error while reading config file: %s \n", err)
 	}
 
 	value, ok := viper.Get(key).(string)
