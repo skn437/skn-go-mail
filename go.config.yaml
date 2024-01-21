@@ -3,3 +3,4 @@ PORT: :8000
 ROUTES:
   MAIL:
     BASIC: /api/mail/basic
+    HTTP: /api/mail/html
