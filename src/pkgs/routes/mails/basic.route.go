@@ -9,25 +9,29 @@ type DataType struct {
 	Title string
 }
 
-func MailRouteBasic(router *gin.Engine, url string) {
-	router.POST(url, func(ctx *gin.Context) {
-		//var body io.ReadCloser = ctx.Request.Body
-		//value, err := io.ReadAll(body)
+func MailRouteBasic(router *gin.Engine, group string, url string) {
+	var mail *gin.RouterGroup = router.Group(group)
 
-		var data *DataType
-		var err error = ctx.BindJSON(&data)
+	{
+		mail.POST(url, func(ctx *gin.Context) {
+			//var body io.ReadCloser = ctx.Request.Body
+			//value, err := io.ReadAll(body)
 
-		if err != nil {
-			panic(err)
-		}
+			var data *DataType
+			var err error = ctx.BindJSON(&data)
 
-		ctx.JSON(200, gin.H{
-			"message-name":  data.Name,
-			"message-title": data.Title,
+			if err != nil {
+				panic(err)
+			}
+
+			ctx.JSON(200, gin.H{
+				"message-name":  data.Name,
+				"message-title": data.Title,
+			})
 		})
-	})
 
-	router.GET(url, func(ctx *gin.Context) {
-		ctx.String(200, "Email Sent Successfully!")
-	})
+		mail.GET(url, func(ctx *gin.Context) {
+			ctx.String(200, "Email Sent Successfully!")
+		})
+	}
 }
