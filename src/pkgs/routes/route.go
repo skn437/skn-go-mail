@@ -10,12 +10,14 @@ import (
 func GetRoutes() {
 	var router *gin.Engine = utils.GetGinRouter()
 
+	var mailGroup string = utils.ViperEnvVariable("ROUTES.MAIL.COMMON")
+
 	//* Routes ++
 	var basicMailUrl string = utils.ViperEnvVariable("ROUTES.MAIL.BASIC")
-	mails.MailRouteBasic(router, basicMailUrl)
+	mails.MailRouteBasic(router, mailGroup, basicMailUrl)
 
-	var httpMailUrl string = utils.ViperEnvVariable("ROUTES.MAIL.HTTP")
-	mails.HttpMailRoute(router, httpMailUrl)
+	var httpMailUrl string = utils.ViperEnvVariable("ROUTES.MAIL.HTML")
+	mails.HttpMailRoute(router, mailGroup, httpMailUrl)
 	//* Routes --
 
 	var port string = utils.ViperEnvVariable("PORT")
